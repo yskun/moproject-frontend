@@ -1,5 +1,74 @@
 <div *ngIf="room">
-  {{room.name}}
-  <h2>{{room.summary}}</h2>
+
+  <div *ngIf="room.code==0">
+    <div  class="show preview">
+      <div *ngIf="!roomHeader.headImg" class="content" style="background-image: url(assets/img/banner.jpg);background-position: center;background-size: contain;">
+        <div  class="title">
+          {{room.name}}
+        </div>
+        <div class="summary" >
+          {{room.summary}}
+        </div>
+      </div>
+      <div class="content" *ngIf="roomHeader.headImg" [style.background-image]="'url('+roomHeader.headImg.toString()+')'" style="background-position: center;background-size: cover;">
+        <div  class="title">
+          {{room.name}}
+        </div>
+        <div class="summary" >
+          {{room.summary}}
+        </div>
+      </div>
+    </div>
+
+
+    <md-card class="example-card" *ngIf="room.firstTime&&suggest_card" [@fadeInOut]>
+
+      <md-card-content *ngIf="!suggest_card_finish">
+        <h2>完成!</h2>
+        <div style="text-align: center;margin: 1em">
+          <div style="margin: 2em auto">
+            <h4>您的房间代号：<b>{{room.slug}}</b></h4>
+            <br>房间代号可以帮助您管理房间
+          </div>
+          您现在可以点击或拖动文件至<i class="fa fa-upload" aria-hidden="true"></i>以上传文件
+          <br>将该房间链接告诉您的朋友一起添加内容
+          <br>此外，您现在可以为您的房间增加管理密码。
+        </div>
+        <div class="center">
+          <md-input-container >
+            <input mdInput placeholder="密码" [(ngModel)]="password">
+          </md-input-container>
+        </div>
+
+      </md-card-content>
+      <md-card-content *ngIf="suggest_card_finish">
+        {{reciveString}}
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button color="primary" *ngIf="password" (click)="submit_ps()" disabled="{{sm}}">提交</button>
+        <button md-button (click)="close_suggest_card()">关闭</button>
+      </md-card-actions>
+    </md-card>
+    <app-room-object [roomHeader]="roomHeader"></app-room-object>
+    <div class="end show center">
+      <div class="title-2">房间</div>
+      <div class="summary">
+        简单的分享平台
+        <br>轻松地传递图片以及其他
+      </div>
+      <section>
+        <a md-raised-button [routerLink]="['../']">了解更多</a>
+      </section>
+    </div>
+  </div>
+  <div *ngIf="room.code==-1">
+    <div class="table-center" [ngStyle]="{height: screenHeight-70 +'px'}">
+      <div class="table-center-content show">
+        <section class="summary">房间尚未创建或已被删除<br>您可以</section>
+        <a md-raised-button color = "primary" [routerLink]="['../new']">新建房间</a>
+        <a md-raised-button [routerLink]="['../']">返回首页</a>
+
+      </div>
+    </div>
+  </div>
 </div>
-<app-room-object></app-room-object>

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="banner">
+    <div class="center banner-title">
+      <section>房间</section>
+      <section>简单分享</section>
+    </div>
+  </div>
+  <div class="show center">
+    <section class="summary">
+      房间<br>
+      简单的分享平台<br>
+      每位访客均可分享、获取<br>
+      房间内的元素
+    </section>
+    <section class="title-2">下一步</section>
+    <a md-raised-button [routerLink]="['../room/new']" color="primary">创建</a>
+    <a md-raised-button [routerLink]="['../room/manage']">管理</a>
+
+    <section class="title-2">了解更多</section>
+    <div class="pad">
+      <md-card class="example-card">
+
+        <md-card-header>
+            <md-card-title>益小菌</md-card-title>
+            <md-card-subtitle>某物计划Leader</md-card-subtitle>
+        </md-card-header>
+        <img md-card-image src="assets/img/show.jpg">
+        <md-card-content>
+          <p>
+            通过房间，可以轻松地分享生活中的元素给我们的朋友。
+          </p>
+        </md-card-content>
+        <md-card-actions>
+          <a md-raised-button [routerLink]="['../room/new']" color="primary">创建</a>
+          <a md-button [routerLink]="['../room/1']">继续访问</a>
+        </md-card-actions>
+      </md-card>
+
+    </div>
+  </div>
+
+  <div class="show center">
+    <section class="title">相关项目</section>
+    <a md-button color="primary" [routerLink]="['../']">某物计划</a>
+  </div>
+
+</div>

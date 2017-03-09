@@ -3,6 +3,15 @@ import {RouterModule, Routes} from "@angular/router";
 
 export const routes:Routes=[
   {
+    path:'',
+    redirectTo:'mothing',
+    pathMatch:'full'
+  },
+  {
+    path:'mothing',
+    loadChildren:'app/mothing/mothing.module#MothingModule'
+  },
+  {
     path:'heroes',
     loadChildren:'app/heroes/heroes.module#HeroesModule'
   },

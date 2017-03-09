@@ -4,8 +4,11 @@
   */
 
 export class Room{
+  slug:string;
   code:number;
   name:string;
   summary:string;
   date:number;
+  objectNumber:number;
+  firstTime:boolean;
 }

@@ -1,0 +1,122 @@
+@theme-color :#678eab;
+
+.center{
+  text-align: center;
+  margin: 0 auto;
+  display: block;
+}
+
+.banner{
+  background-color: @theme-color;
+  color:#fff;
+  .banner-title{
+    :first-child{
+      font-size: 2.3em;
+    }
+    section{
+      font-size: 1em;
+      padding: 0.25em;
+    }
+    :last-child{
+      letter-spacing:1.5em;
+      text-indent:1.5em;
+    }
+    padding: 4em 0;
+  }
+}
+
+.mat-danger{
+  background-color: #ff385c;
+  color: #ffffff;
+}
+
+.header{
+  background-color: @theme-color;
+  color:#fff;
+  .header-title{
+    :first-child{
+      font-size: 2.3em;
+    }
+    section{
+      font-size: 1em;
+    }
+    padding: 2em 0.5em;
+  }
+}
+
+.show{
+  .title{
+    font-size: 1.5em;
+    padding: 1em 0.5em;
+  }
+  .title-2{
+    font-size: 1.2em;
+    padding: 0.8em 0;
+  }
+  .summary{
+    color: #1c1c1c;
+    padding:1em 0;
+  }
+  margin-bottom: 10px;
+}
+
+.form{
+  max-width: 800px;
+  md-input-container{
+    width: 95%;
+    padding:0.5em 0;
+  }
+}
+
+.preview{
+  .content{
+    margin: 0 -24px 0;
+    padding-top: 6em;
+    .title{
+      background-color: #fff;
+      display: table;
+      padding: 0.5em;
+      margin-bottom: 0.5em;
+    }
+    .summary{
+      background-color: #fff;
+      display: inline-block;
+      padding: 0.5em;
+      margin-bottom: 1em;
+    }
+  }
+}
+
+.md-primary{
+  background-color: @theme-color;
+  color: #fff;
+}
+
+.example-card{
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.pad{
+  padding: 4px;
+}
+
+md-card{
+  text-align: left;
+  overflow: hidden;
+}
+
+md-card-actions, md-card-content, md-card-subtitle, md-card-title {
+  display: block;
+  margin-bottom: 11px;
+}
+
+md-card>md-card-actions:last-child {
+  margin-bottom: -16px;
+  padding-bottom: 0;
+  padding-left: 4px;
+}
+
+.btn{
+  margin-top: 8em;
+}

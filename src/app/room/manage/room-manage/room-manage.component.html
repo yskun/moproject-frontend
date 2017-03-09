@@ -1,0 +1,9 @@
+
+<div class="container" [@flyIn]>
+  <div class="show center form" *ngIf="!mode">
+    <div class="summary" style="margin-top: 8em">
+      房间代号：{{login.slug}}
+    </div>
+    <button md-button color="danger" (click)="delete_room()">删除房间</button>
+  </div>
+</div>

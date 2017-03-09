@@ -1,0 +1,38 @@
+<div class="header">
+  <div class="header-title">
+    <section>创建房间</section>
+    <section>第一步</section>
+  </div>
+</div>
+
+<div *ngIf="room" class="show center form">
+  <div class="summary">
+    请填写以下信息
+  </div>
+  <md-input-container>
+    <input mdInput placeholder="房间名称" [(ngModel)]="room.name">
+  </md-input-container>
+  <md-input-container>
+    <textarea mdInput placeholder="简述" [(ngModel)]="room.summary"></textarea>
+  </md-input-container>
+</div>
+
+<div class="show preview" *ngIf="room.name||room.summary" [@fadeInOut]>
+  <div class="title">预览</div>
+  <div class="pad">
+    <md-card >
+      <div class="content" style="background-image: url(assets/img/banner.jpg);background-position: center;background-size: contain;">
+        <div  class="title">
+          {{room.name}}
+        </div>
+        <div class="summary" >
+          {{room.summary}}　
+        </div>
+      </div>
+    </md-card>
+  </div>
+</div>
+
+<button md-fab class="center" *ngIf="room.name&&room.summary" style="margin: 2em auto" (click)="submit()" [@fadeInOut]><i class="fa fa-check" aria-hidden="true"></i></button>
+
+

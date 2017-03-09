@@ -10,4 +10,7 @@ export class Policy{
   signature:string;
   expire:number;
   dir:string;
+  callback:string;
+  objectId:number;
+  order:number;
 }

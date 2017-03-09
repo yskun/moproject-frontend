@@ -1,0 +1,20 @@
+<section class="header">
+  <div class="header-title">
+    <section>管理</section>
+  </div>
+</section>
+<div class="show center form" *ngIf="!mode" [@flyIn] (@flyIn.done)="modeChange($event)">
+  <div class="summary"  [ngStyle]="{'margin-top' : margin +'px'}">
+    请填写下述信息
+  </div>
+    <md-input-container>
+      <input mdInput #term (keyup)="code(term.value)"  placeholder="房间代码" [(ngModel)]="login.slug"/>
+    </md-input-container>
+    <md-input-container *ngIf="password_state===1" >
+
+      <input mdInput placeholder="密码" [(ngModel)]="password">
+    </md-input-container>
+  <button md-fab *ngIf="password && password_state!==-1 || password_state===0" [@fadeInOut] class="center btn" (click)="submit()"><i class="fa fa-check" aria-hidden="true"></i></button>
+</div>
+
+<app-room-manage *ngIf="mode&&modeChange_" [login]="login"></app-room-manage>

@@ -1,0 +1,50 @@
+<div class="previewer" >
+  <div class="touch"
+       (click)="blackClick()"
+       (panmove)="panmove($event)"
+       (panend)="panend($event)"
+  ></div>
+
+  <div *ngIf="!iphone_mode">
+    <img *ngIf="mode" src="{{imageExpress.nowImage.url}}?x-oss-process=image/interlace,1/auto-orient,1"
+         [ngStyle]="{
+              'transform':  'translate3d('+imageExpress.showX+'px,'+imageExpress.showY+'px,'+'0px) '+
+       'scale('+imageExpress.showScale+','+imageExpress.showScale+')',
+       width:imageExpress.showWidth+'px',
+       height:imageExpress.showHeight+'px'
+       }"
+         [ngClass]="{'transition': !isMove}"
+
+         (panmove)="panmove($event)"
+         (panend)="panend($event)"
+         (tap)="click($event)"
+         (pinchout)="pinchout($event)"
+         (pinchin)="pinchin($event)"
+         (pinchend)="pinchend($event)"
+
+         alt="">
+  </div>
+
+  <div *ngIf="iphone_mode">
+    <img  src="{{imageExpress.nowImage.url}}?x-oss-process=image/interlace,1/auto-orient,1"
+          [ngStyle]="{
+         top:imageExpress.showY+'px',
+         left:imageExpress.showX+'px',
+       width:imageExpress.showWidth*imageExpress.showScale+'px',
+       height:imageExpress.showHeight*imageExpress.showScale+'px'
+       }"
+         [ngClass]="{'transition': !isMove}"
+
+         (panmove)="panmove($event)"
+         (panend)="panend($event)"
+         (tap)="click($event)"
+         (pinchout)="pinchout($event)"
+         (pinchin)="pinchin($event)"
+         (pinchend)="pinchend($event)"
+         (press)="press($event)"
+         alt="">
+  </div>
+
+
+</div>
+

@@ -3,5 +3,5 @@
  */
 
 export const Config = {
-  backend:'http://127.0.0.1:3000/'
+  backend:'http://api.moproject.me/'
 };

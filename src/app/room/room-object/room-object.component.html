@@ -1,58 +1,133 @@
-<div *ngIf="policy">
-  <div *ngIf="uploader">
-    <table class="table">
-      <thead>
-      <tr>
-        <th width="50%">Name</th>
-        <th>Size</th>
-        <th>Progress</th>
-        <th>Status</th>
-        <th>Actions</th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of uploader.queue">
-        <td><strong>{{ item?.file?.name }}</strong></td>
-        <td  nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
-        <td>
-          <div class="progress" style="margin-bottom: 0;">
-            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': item.progress + '%' }" style="height: 10px;background-color: #000;"></div>
+
+<div class="block clearfix">
+  <md-button-toggle-group [(ngModel)]="show_mode" style="float: right">
+    <md-button-toggle value="1">
+      <i class="fa fa-align-center" aria-hidden="true"></i>
+    </md-button-toggle>
+    <md-button-toggle value="2">
+      <i class="fa fa-align-justify" aria-hidden="true"></i>
+    </md-button-toggle>
+  </md-button-toggle-group>
+</div>
+
+<div class="container">
+  <div  *ngIf="show_mode==2" [@fadeInOut]>
+    <div class="show_1 center">
+      <div *ngIf="objects" >
+        <md-card *ngFor="let object of objects" >
+          <img *ngIf="object.url" src="{{object.url}}?x-oss-process=image/resize,h_300/auto-orient,1" (click)="img_click(object)" style="max-width: 100%" alt="">
+          <div *ngIf="!object.url && !object.fileItem">
+            <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+            <span class="sr-only">Loading...</span>
           </div>
-        </td>
-        <td class="text-center">
-          <span *ngIf="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
-          <span *ngIf="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
-          <span *ngIf="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
-        </td>
-        <td nowrap>
-          <button type="button" class="btn btn-success btn-xs"
-                  (click)="uploadOnclick(item)" [disabled]="item.isReady || item.isUploading || item.isSuccess">
-            <span class="glyphicon glyphicon-upload"></span> Upload
-          </button>
-          <button type="button" class="btn btn-warning btn-xs"
-                  (click)="item.cancel()" [disabled]="!item.isUploading">
-            <span class="glyphicon glyphicon-ban-circle"></span> Cancel
-          </button>
-          <button type="button" class="btn btn-danger btn-xs"
-                  (click)="item.remove()">
-            <span class="glyphicon glyphicon-trash"></span> Remove
-          </button>
-        </td>
-      </tr>
-      </tbody>
+          <div *ngIf="!object.url && object.fileItem">
+            <img *ngIf="object.src" src={{object.src}} alt="" width="100%">
 
 
-    </table>
-    Multiple
-    <input type="file" ng2FileSelect [uploader]="uploader" multiple  />
+            <div style="margin-top: 24px">
+              <div  style="padding: 2em;">
+                <div class="summary">正在上传</div>
+                <md-progress-bar
+                  class="example-margin"
+                  color="primary"
+                  mode="determinate"
+                  [value]="object.fileItem.progress"
+                >
+                </md-progress-bar>
+                {{object.fileItem.isError}}
+
+              </div>
+            </div>
+          </div>
+        </md-card>
+      </div>
+      <div class="upload">
+        <md-card class="upload-card"
+                 [ngClass]="{'file-over': hasBaseDropZoneOver}"
+                 ng2FileDrop
+                 [uploader]="uploader"
+                 (fileOver)="dropfile($event)"
+                 (onFileDrop)="test()">
+          <div class="center card-summary">
+            <i class="fa fa-upload fa-3x" aria-hidden="true"></i>
+          </div>
+          <input type="file" ng2FileSelect [uploader]="uploader" multiple #upload (change)="test()"/>
+        </md-card>
+      </div>
+    </div>
   </div>
+  <div  *ngIf="show_mode==1"  [@fadeInOut]>
+    <div class="show_1 center clearfix">
+      <div *ngIf="objects"  >
+        <div *ngFor="let object of objects"  [ngClass]="{start: object.isStart}" class="object-box">
+          <div *ngIf="object.url"
+               (click)="img_click(object)"
+               [ngStyle]="
+               {
+                width: object.showWidth -4 +'px',
+                height:object.showHeight -4+'px',
+                'background-image':'url('+object.url+'?x-oss-process=image/resize,h_300)'
+                }"
+               class="object-box-img"
+          >
 
+          </div>
+          <div *ngIf="!object.url && !object.fileItem" [ngStyle]="
+           {
+                width: object.showWidth -4 +'px',
+                height:object.showHeight -4+'px'
+            }" class="table-center">
+            <div class="table-center-content">
+              <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+          <div *ngIf="!object.url && object.fileItem" [ngStyle]="
+           {
+                width: object.showWidth -4 +'px',
+                height:object.showHeight -4 +'px'
+            }" class="upl " [@fadeInOut]>
+            <img *ngIf="object.src"
+
+                 src="{{object.src}}"
+                 style="height:100%;">
+            <div class="uper table-center">
+              <div class="table-center-content" style="padding: 2em;">
+                <div class="summary">正在上传</div>
+                <md-progress-bar
+                  class="example-margin"
+                  color="primary"
+                  mode="determinate"
+                  [value]="object.fileItem.progress"
+                >
+                </md-progress-bar>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="upload center" style="max-width: 800px">
+      <div class="upload-card"
+           [ngClass]="{'file-over': hasBaseDropZoneOver}"
+           ng2FileDrop
+           [uploader]="uploader"
+           (fileOver)="dropfile($event)"
+           (onFileDrop)="test()"
+           style="background-color: #e8e8e8;"
+      >
+        <div class="center card-summary">
+          <i class="fa fa-upload fa-3x" aria-hidden="true"></i>
+        </div>
+        <input type="file" ng2FileSelect [uploader]="uploader" multiple #upload (change)="test()"/>
+      </div>
+    </div>
+
+  </div>
 </div>
 
-<div *ngIf="objects">
-  <ul *ngFor="let object of objects">
-    <li>
-      <img src="{{object.url}}" alt="">
-    </li>
-  </ul>
-</div>
+
+<app-room-pic-preview *ngIf="imageExpress.show" [imageExpress]="imageExpress" [@fadeInOut]></app-room-pic-preview>

@@ -3,12 +3,11 @@ import {Http, Response} from "@angular/http";
 import {Observable} from "rxjs";
 import {Policy} from "./model/policy";
 import {Config} from "../system/config";
-import {FileUploader, FileItem} from "ng2-file-upload";
-import {Object} from "./model/object";
+import {OssObject} from "./model/object";
 
 @Injectable()
 export class ObjectService {
-  private policy_api = 'object/policy';
+  private policy_api = 'object/upload/';
   private object_api = 'object/room/';
   private handleError(error: Response|any) {
     let errMsg: string;
@@ -25,11 +24,11 @@ export class ObjectService {
 
   constructor(private http:Http) { }
 
-  getPolicy():Observable<Policy>{
-    return this.http.get(Config.backend+this.policy_api).map((res:Response)=>res.json()).catch(this.handleError);
+  getPolicy(colId:number):Observable<Policy>{
+    return this.http.get(Config.backend+this.policy_api+colId).map((res:Response)=>res.json()).catch(this.handleError);
   }
 
-  getObject(colId:number):Observable<Object[]>{
+  getObject(colId:number):Observable<OssObject[]>{
     return this.http.get(Config.backend+this.object_api+colId).map((res:Response)=>res.json()).catch(this.handleError);
   }
 
