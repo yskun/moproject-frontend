@@ -17,6 +17,10 @@
     "types": [
       "hammerjs",
       "rxjs"
-    ]
+    ],
+    "exclude": [
+    "test.ts",
+    "**/*.spec.ts"
+  ]
   }
 }

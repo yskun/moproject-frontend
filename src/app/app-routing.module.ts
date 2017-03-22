@@ -1,23 +1,14 @@
 import { NgModule } from '@angular/core';
-import {RouterModule, Routes} from "@angular/router";
+import {RouterModule, Routes} from '@angular/router';
 
-export const routes:Routes=[
+export const routes: Routes = [
   {
-    path:'',
-    redirectTo:'mothing',
-    pathMatch:'full'
+    path: '',
+    loadChildren: 'app/mothing/mothing.module#MothingModule'
   },
   {
-    path:'mothing',
-    loadChildren:'app/mothing/mothing.module#MothingModule'
-  },
-  {
-    path:'heroes',
-    loadChildren:'app/heroes/heroes.module#HeroesModule'
-  },
-  {
-    path:'room',
-    loadChildren:'app/room/room.module#RoomModule'
+    path: 'room',
+    loadChildren: 'app/room/room.module#RoomModule'
   }
 ];
 
@@ -25,7 +16,7 @@ export const routes:Routes=[
   imports: [
     RouterModule.forRoot(routes)
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })
