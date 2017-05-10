@@ -9,6 +9,10 @@ export const routes: Routes = [
   {
     path: 'room',
     loadChildren: 'app/room/room.module#RoomModule'
+  },
+  {
+    path: 'icycle',
+    loadChildren: 'app/cyclehelper/cyclehelper.module#CyclehelperModule'
   }
 ];
 

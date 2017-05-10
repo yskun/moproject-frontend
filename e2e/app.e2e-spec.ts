@@ -1,10 +1,10 @@
-import { MothingsFrontEndPage } from './app.po';
+import { CccPage } from './app.po';
 
-describe('mothings-front-end App', function() {
-  let page: MothingsFrontEndPage;
+describe('ccc App', () => {
+  let page: CccPage;
 
   beforeEach(() => {
-    page = new MothingsFrontEndPage();
+    page = new CccPage();
   });
 
   it('should display message saying app works', () => {
